@@ -46,6 +46,7 @@ class URLParams {
 
   /**
    * Appends a specified key/value pair as a new search parameter.
+   *
    * @param {String} name
    * @param {any} value
    * @returns {void}
