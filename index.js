@@ -1,4 +1,28 @@
 /**
+ * Update url
+ *
+ * @param {URL|String} url
+ * @param {Boolean} saveState if true - session will saved in history
+ * as new object, else replace last record
+ *
+ * @returns {void}
+ */
+function changeUrl(url, saveState = false) {
+  try {
+    if (window.history.replaceState && !saveState) {
+      // prevents browser from storing history
+      window.history.replaceState(name, document.title, url);
+    }
+    else if (window.history.pushState && saveState) {
+      window.history.pushState(name, document.title, url)
+    }
+    else {
+      window.location.href = url
+    }
+  } catch(e) {}
+}
+
+/**
  * Managing URL parameters
  */
 class URLParams {
@@ -15,9 +39,9 @@ class URLParams {
    *
    * @returns {void}
    */
-  set(name, value, saveState) {
+  set(name, value, saveState = false) {
     this.url.searchParams.set(name, value)
-    this._changeUrl(saveState)
+    changeUrl(this.url, saveState)
   }
 
   /**
@@ -62,32 +86,9 @@ class URLParams {
    *
    * @returns {void}
    */
-  delete(name, saveState) {
+  delete(name, saveState = false) {
     this.url.searchParams.delete(name)
-    this._changeUrl(saveState)
-  }
-
-  /**
-   * Update url
-   *
-   * @param {Boolean} saveState if true - session will saved in history
-   * as new object, else replace last record
-   *
-   * @returns {void}
-   */
-  _changeUrl(saveState = false) {
-    try {
-      if (window.history.replaceState && !saveState) {
-        // prevents browser from storing history
-        window.history.replaceState(name, document.title, this.url);
-      }
-      else if (window.history.pushState && saveState) {
-        window.history.pushState(name, document.title, this.url)
-      }
-      else {
-        window.location.href = this.url.toString()
-      }
-    } catch(e) {}
+    changeUrl(this.url, saveState)
   }
 }
 
