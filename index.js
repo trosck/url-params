@@ -90,6 +90,15 @@ class URLParams {
     this.url.searchParams.delete(name)
     changeUrl(this.url, saveState)
   }
+
+  /**
+   * Returns a USVString containing the whole URL
+   *
+   * @returns {String} URL string representation
+   */
+  toString() {
+    return this.url.toString()
+  }
 }
 
 export default URLParams
