@@ -31,7 +31,7 @@ class URLParams {
   }
 
   /**
-   * Add/delete parameter
+   * Set parameter
    *
    * @param {String} name
    * @param {String|Number} value
@@ -42,6 +42,16 @@ class URLParams {
   set(name, value, saveState = false) {
     this.url.searchParams.set(name, value)
     changeUrl(this.url, saveState)
+  }
+
+  /**
+   * Appends a specified key/value pair as a new search parameter.
+   * @param {String} name
+   * @param {any} value
+   * @returns {void}
+   */
+  append(name, value) {
+    this.url.searchParams.append(name, value)
   }
 
   /**
