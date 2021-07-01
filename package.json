@@ -1,0 +1,19 @@
+{
+  "name": "url-params",
+  "version": "1.0.0",
+  "description": "Class for working with URL query string (uses URLSearchParams interface under the hood)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/troskcey/urlParams.git"
+  },
+  "author": "trosckey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/troskcey/urlParams/issues"
+  },
+  "homepage": "https://github.com/troskcey/urlParams#readme"
+}
