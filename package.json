@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/troskcey/urlParams/issues"
   },
-  "homepage": "https://github.com/troskcey/urlParams#readme"
+  "homepage": "https://github.com/troskcey/urlParams#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
 }
