@@ -5,11 +5,11 @@ try {
   url = new URLParams(window.location.href)
 } catch(e) {}
 
-const urlMixin = {
+export default {
   mounted() {
     /**
      * Updating url parameters after called component 'mounted',
-     * because he could change watching values
+     * because he can change watching values
      */
     this.$nextTick(() => {
       try {
@@ -68,5 +68,3 @@ const urlMixin = {
     }
   }
 }
-
-export default urlMixin
