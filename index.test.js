@@ -1,5 +1,4 @@
-const { expect, test } = require('@jest/globals')
-const URLParams = require('./index')
+const URLParams = require('./index.js')
 
 const [name, value] = ['hello', 'world']
 
@@ -20,30 +19,6 @@ test(
         .toString()
     )
       .toBe(exampleWithParams)
-  }
-)
-
-test(
-  'set({ name: value })',
-  () => {
-    expect(
-      getExample()
-        .set({ [name]: value })
-        .toString()
-    )
-      .toBe(exampleWithParams)
-  }
-)
-
-test(
-  'set({ name: null })',
-  () => {
-    expect(
-      getExample()
-        .set({ [name]: null })
-        .toString()
-    )
-      .toBe(exampleURL)
   }
 )
 
