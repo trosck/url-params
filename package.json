@@ -1,5 +1,5 @@
 {
-  "name": "@trosk/url-params",
+  "name": "@trosckey/url-params",
   "version": "1.0.0",
   "description": "Class for working with URL query string (uses URLSearchParams interface under the hood)",
   "main": "index.js",
