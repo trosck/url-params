@@ -30,7 +30,7 @@ Class that made for easy work with URL searchparams
 Using npm:
 
 ```bash
-$ npm install @trosk/url-params
+$ npm install @troskey/url-params
 ```
 
 ## example
