@@ -2,19 +2,19 @@
  * Update url
  *
  * @param {URL|String} url
- * @param {Boolean} saveState if true - session will saved in history
- * as new object, else replace last record
+ * @param {Boolean} saveState if true - session
+ * will be saved in history as new object,
+ * else replaced last record
  *
  * @returns {void}
  */
 function changeUrl(url, saveState = false) {
   try {
     if (window.history.replaceState && !saveState) {
-      // prevents browser from storing history
-      window.history.replaceState(name, document.title, url);
+      window.history.replaceState(null, document.title, url);
     }
     else if (window.history.pushState && saveState) {
-      window.history.pushState(name, document.title, url)
+      window.history.pushState(null, document.title, url)
     }
     else {
       window.location.href = url
@@ -27,7 +27,15 @@ function changeUrl(url, saveState = false) {
  */
 class URLParams {
   constructor(url) {
-    this.url = new URL(url)
+    this._url = url
+  }
+
+  get url() {
+    try {
+      return new URL(this._url || window.location.href)
+    } catch(e) {
+      return new URL()
+    }
   }
 
   /**
@@ -37,11 +45,12 @@ class URLParams {
    * @param {String|Number} value
    * @param {Boolean} saveState
    *
-   * @returns {void}
+   * @returns {URLParams}
    */
   set(name, value, saveState = false) {
     this.url.searchParams.set(name, value)
     changeUrl(this.url, saveState)
+    return this
   }
 
   /**
@@ -49,10 +58,12 @@ class URLParams {
    *
    * @param {String} name
    * @param {any} value
-   * @returns {void}
+   * @returns {URLParams}
    */
-  append(name, value) {
+  append(name, value, saveState = false) {
     this.url.searchParams.append(name, value)
+    changeUrl(url, saveState)
+    return this
   }
 
   /**
@@ -95,11 +106,12 @@ class URLParams {
    * @param {String} name - The name of the parameter to be deleted.
    * @param {Boolean} saveState
    *
-   * @returns {void}
+   * @returns {URLParams}
    */
   delete(name, saveState = false) {
     this.url.searchParams.delete(name)
     changeUrl(this.url, saveState)
+    return this
   }
 
   /**
@@ -112,4 +124,7 @@ class URLParams {
   }
 }
 
-export default URLParams
+export default {
+  URLParams,
+  urlParams: new URLParams()
+}
