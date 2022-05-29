@@ -21,7 +21,7 @@ Class that made for easy work with URL searchparams
     - [getAllParams](#getallparams)
     - [delete](#deletename-savestate)
     - [toString](#tostring)
-  - [Vue(2.x) mixin](#vue2x-mixin)
+  - [License](#license)
 
 <!-- 
 ## Features
