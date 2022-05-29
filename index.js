@@ -27,15 +27,15 @@ function changeUrl(url, saveState = false) {
  */
 class URLParams {
   constructor(url) {
-    this._url = url
+    try {
+      this._url = new URL(url || window.location.href)
+    } catch(e) {
+      this._url = new URL()
+    }
   }
 
   get url() {
-    try {
-      return new URL(this._url || window.location.href)
-    } catch(e) {
-      return new URL()
-    }
+    return this.toString()
   }
 
   /**
@@ -48,8 +48,8 @@ class URLParams {
    * @returns {URLParams}
    */
   set(name, value, saveState = false) {
-    this.url.searchParams.set(name, value)
-    changeUrl(this.url, saveState)
+    this._url.searchParams.set(name, value)
+    changeUrl(this._url, saveState)
     return this
   }
 
@@ -61,8 +61,8 @@ class URLParams {
    * @returns {URLParams}
    */
   append(name, value, saveState = false) {
-    this.url.searchParams.append(name, value)
-    changeUrl(url, saveState)
+    this._url.searchParams.append(name, value)
+    changeUrl(this._url, saveState)
     return this
   }
 
@@ -74,7 +74,7 @@ class URLParams {
    * @returns {String}
    */
   get(name) {
-    return this.url.searchParams.get(name)
+    return this._url.searchParams.get(name)
   }
 
   /**
@@ -85,7 +85,7 @@ class URLParams {
    * @returns {Array<String>} An array of values
    */
   getAll(name) {
-    return this.url.searchParams.getAll(name)
+    return this._url.searchParams.getAll(name)
   }
 
   /**
@@ -95,7 +95,7 @@ class URLParams {
    * with [key, value] structure
    */
   getAllParams() {
-    return Array.from(this.url.searchParams.entries())
+    return Array.from(this._url.searchParams.entries())
   }
 
   /**
@@ -109,8 +109,8 @@ class URLParams {
    * @returns {URLParams}
    */
   delete(name, saveState = false) {
-    this.url.searchParams.delete(name)
-    changeUrl(this.url, saveState)
+    this._url.searchParams.delete(name)
+    changeUrl(this._url, saveState)
     return this
   }
 
@@ -120,11 +120,15 @@ class URLParams {
    * @returns {String} URL string representation
    */
   toString() {
-    return this.url.toString()
+    return this._url.toString()
   }
 }
 
-export default {
+function urlParams(url) {
+  return new URLParams(url)
+}
+
+export {
   URLParams,
-  urlParams: new URLParams()
+  urlParams
 }
