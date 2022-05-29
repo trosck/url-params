@@ -3,7 +3,6 @@
 Class that made for easy work with URL searchparams
 
 ![](https://img.shields.io/npm/v/@trosckey/url-params.svg)
-![](https://packagephobia.now.sh/badge?p=@trosckey/url-params)
 ![](https://img.shields.io/bundlephobia/minzip/@trosckey/url-params)
 ![](https://img.shields.io/npm/l/@trosckey/url-params)
 ![](https://img.shields.io/github/last-commit/trosck/urlParams/main)
