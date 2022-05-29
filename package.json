@@ -1,7 +1,7 @@
 {
   "name": "@trosckey/url-params",
-  "version": "1.0.0",
-  "description": "Class for working with URL query string (uses URLSearchParams interface under the hood)",
+  "version": "2.0.0",
+  "description": "Class for working with URL query string (uses URL.searchparams interface under the hood)",
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
@@ -22,7 +22,6 @@
   "type": "module",
   "keywords": [
     "url",
-    "vue",
-    "searchparams"
+    "search params"
   ]
 }
