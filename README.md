@@ -21,7 +21,7 @@ Class that made for easy work with URL searchparams
     - [getAllParams](#getallparams)
     - [delete](#deletename-savestate)
     - [toString](#tostring)
-  - [Vue(2.x) mixin](#vue2x-mixin)
+  - [License](#license)
 
 <!-- 
 ## Features
@@ -160,3 +160,7 @@ urlParams('https://github.com?hello=world')
 ### toString()
 
 Returns url string, can be used for [auto cast to string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString#description)
+
+## License
+
+[MIT](LICENSE)
