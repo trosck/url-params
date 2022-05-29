@@ -27,7 +27,7 @@ function changeUrl(url, saveState = false) {
  */
 class URLParams {
   constructor(url) {
-    this._url = (URL || window.URL)(url || window.location.href)
+    this._url = new (URL || window.URL)(url || window.location.href)
   }
 
   get url() {
