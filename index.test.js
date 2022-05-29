@@ -1,93 +1,70 @@
-const URLParams = require('./index.js')
+import { URLParams, urlParams } from './index.js'
 
 const [name, value] = ['hello', 'world']
 
 const exampleURL = 'https://example.com/'
 const exampleWithParams = `${exampleURL}?${name}=${value}`
+const exampleWithTwoParams = `${exampleWithParams}&${name}=${value}`
 
-const getExample = () => new URLParams(exampleURL)
-const getExampleWithParams = () => new URLParams(exampleWithParams)
-
-// set
-
-test(
-  'set(name, value)',
-  () => {
-    expect(
-      getExample()
-        .set(name, value)
-        .toString()
-    )
-      .toBe(exampleWithParams)
+global.window = {
+  location: {
+    href: exampleURL
   }
+}
+
+describe(
+  'new URLParams()',
+  () => testAllFunctions(new URLParams())
 )
 
-// append
-
-test(
-  'append(name, value)',
-  () => {
-    expect(
-      getExample()
-        .append(name, value)
-        .toString()
-    )
-      .toBe(exampleWithParams)
-  }
+describe(
+  'new URLParams(url)',
+  () => testAllFunctions(new URLParams(exampleURL))
 )
 
-// get
-
-test(
-  'get(name)',
-  () => {
-    expect(
-      getExampleWithParams()
-        .get(name)
-    )
-      .toBe(value)
-  }
+describe(
+  'urlParams()',
+  () => testAllFunctions(urlParams())
 )
 
-// getAll
-
-test(
-  'getAll(name)',
-  () => {
-    expect(
-      getExampleWithParams()
-        .getAll(name)
-    )
-      .toEqual([value])
-  }
+describe(
+  'urlParams(url)',
+  () => testAllFunctions(urlParams(exampleURL))
 )
 
-// getAllParams
+function testAllFunctions(instance) {
+  it(
+    'has url property',
+    () => expect(instance.url).toBe(exampleURL)
+  )
 
-test(
-  'getAllParams()',
-  () => {
-    expect(
-      getExampleWithParams()
-        .getAllParams()
-    )
-      .toEqual([[name, value]])
-  }
-)
+  it(
+    'set query param',
+    () => expect(instance.set(name, value).url).toBe(exampleWithParams)
+  )
 
-// delete
+  it(
+    'return value of query param',
+    () => expect(instance.get(name)).toBe(value)
+  )
 
-test(
-  'delete(name)',
-  () => {
-    expect(
-      getExampleWithParams()
-        .delete(name)
-        .toString()
-    )
-      .toBe(
-        getExample()
-          .toString()
-      )
-  }
-)
+  it(
+    'append query param',
+    () => expect(instance.append(name, value).url).toBe(exampleWithTwoParams)
+  )
+
+  it(
+    'returns all values of query param',
+    () => expect(instance.getAll(name)).toEqual([value, value])
+  )
+
+  it(
+    'returns all query params in two dimensional array',
+    () => expect(instance.getAllParams()).toEqual([[name, value], [name, value]])
+  )
+
+  it(
+    'delete query param',
+    () => expect(instance.delete(name).url).toBe(exampleURL)
+  )
+}
