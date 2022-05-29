@@ -10,7 +10,9 @@ Class that made for easy work with URL searchparams
 ## Table of Contents
   - [Browser Support](#browser-support)
   - [Installing](#installing)
-  - [Example](#example)
+  - [Creating an instance](#creating-an-instance)
+  - [Use urlParams function](#use-urlparams-function)
+  - [Usage](#usage)
   - [API](#api)
     - [set](#setname-value-savestate)
     - [append](#appendname-value-savestate)
@@ -18,6 +20,7 @@ Class that made for easy work with URL searchparams
     - [getAll](#getallname)
     - [getAllParams](#getallparams)
     - [delete](#deletename-savestate)
+    - [toString](#tostring)
   - [Vue(2.x) mixin](#vue2x-mixin)
 
 <!-- 
@@ -38,92 +41,122 @@ Using npm:
 $ npm install @troskey/url-params
 ```
 
-## example
+## Usage
 
-Using with custom URL
+Methods **delete**, **set** and **append** returns *this* for   
+call chain, so you should use **url** or **toString()** to get   
+url string   
+
+## Creating an instance
+
 ```javascript
 import { URLParams } from 'url-params'
-const urlParams = new URLParams('https://github.com')
-console.log(
-  urlParams
-    .set('hello', 'world')
-    .get('hello')
-)
+
+new URLParams('https://github.com')
+  .set('hello', 'world')
+  .get('hello') // "world"
 ```
 
-Using with default(window.location.href) URL
+## Use urlParams function
+
 ```javascript
 import { urlParams } from 'url-params'
-console.log(
-  urlParams
-    .set('hello', 'world')
-    .get('hello')
-)
+
+urlParams('https://github.com')
+  .set('hello', 'world')
+  .get('hello') // "world"
+```
+
+## Usage
+
+Methods **delete**, **set** and **append** returns *this* for   
+call chain, so you should use **url** or **toString()** to get   
+url string   
+
+```javascript
+urlParams('https://github.com')
+  .set('hello', 'world')
+  .append('hello', 'web')
+  .url // https://github.com?hello=world&hello=web
 ```
 
 ## API
 
-saveSate - using [window.history.pushState](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) instead of [window.history.replaceState](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState)
+saveSate(default false) - using [window.history.pushState](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState)   
+instead of [window.history.replaceState](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState)
+
+replaces window.location.href if none   
+of methods above is not available   
+
+### url
+
+Returns url string
 
 ### set(name, value[, saveState])
+
+Sets value with the given key
+
 ```javascript
-urlParams.set('hello', 'world') // https://github.com?hello=world
-urlParams.set('hello', 'world', true) // https://github.com?hello=there
+urlParams('https://github.com')
+  .set('hello', 'world')
+  .set('hi', 'web')
+  .url // https://github.com?hello=world&hi=web
 ```
 
 ### append(name, value[, saveState])
+
+Appends value with the given key
+
 ```javascript
-urlParams.append('hello', 'world') // https://github.com?hello=world
-urlParams.append('hello', 'there', true) // https://github.com?hello=world&hello=there
+urlParams('https://github.com')
+  .append('hello', 'world')
+  .append('hello', 'there', true)
+  .url // https://github.com?hello=world&hello=there
 ```
 
 ### get(name)
+
+Returns first searched item from left, otherwise null
+
 ```javascript
-const urlParams = new URLParams('https://github.com?hello=world')
-urlParams.get('hello') // "world"
-urlParams.get('hi') // null
+urlParams('https://github.com?hello=world&hello=there')
+  .get('hello') // "world"
+
+urlParams('https://github.com')
+  .get('hi') // null
 ```
 
 ### getAll(name)
+
+Returns all values of query param in array
+
 ```javascript
-const urlParams = new URLParams('https://github.com?hello=world&hello=there')
-urlParams.getAll('hello') // ["world", "there"]
-urlParams.getAll('hi') // []
+urlParams('https://github.com?hello=world&hello=there')
+  .getAll('hello') // ["world", "there"]
+
+urlParams('https://github.com')
+  .getAll('hello') // []
 ```
 
 ### getAllParams()
+
+Returns all query params in two-dimensional array
+
 ```javascript
-const urlParams = new URLParams('https://github.com?hello=world&hello=there&test=123')
-urlParams.getAllParams() // [["hello", "world"], ["hello", "there"], ["test", "123"]]
+urlParams('https://github.com?hello=world&hello=there&test=123')
+  .getAllParams() // [["hello", "world"], ["hello", "there"], ["test", "123"]]
 ```
 
 ### delete(name[, saveState])
+
+Deleting query param from url
+
 ```javascript
-const urlParams = new URLParams('https://github.com?hello=world&hi=123')
-urlParams.delete('hello') // https://github.com?hi=123
-urlParams.delete('hi') // https://github.com
+urlParams('https://github.com?hello=world')
+  .delete('hello')
+  .url // https://github.com
 ```
 
-## Vue(2.x) mixin
-```javascript
-import urlParamsMixin from 'url-params/vue-mixin'
+### toString()
 
-new Vue({
-  mixins: [urlParamsMixin],
-
-  urlMixinConfig: ['page', 'pageSize'],
-
-  data() {
-    return {
-      page: 1,
-      pageSize: 40
-    }
-  },
-
-  methods: {
-    onChangePageSize(pageSize) {
-      this.pageSize = pageSize // url will be updated too
-    }
-  }
-})
-```
+Returns url string, can be used for [auto cast to string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString#description)
