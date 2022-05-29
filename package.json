@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/troskcey/urlParams#readme",
   "devDependencies": {
-    "jest": "^27.0.6"
+    "jest": "^28.1.0"
   },
   "keywords": [
     "url",
