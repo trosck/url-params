@@ -1,6 +1,6 @@
 # urlParams
 
-Class that made for easy work with URL searchparams
+Class that made for easy work with URL search params
 
 ![](https://img.shields.io/npm/v/@trosckey/url-params.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@trosckey/url-params)
