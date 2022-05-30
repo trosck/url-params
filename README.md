@@ -10,9 +10,9 @@ Class that made for easy work with URL search params
 ## Table of Contents
   - [Browser Support](#browser-support)
   - [Installing](#installing)
-  - [Creating an instance](#creating-an-instance)
-  - [Using urlParams function](#using-urlparams-function)
   - [Usage](#usage)
+    - [Creating an instance](#creating-an-instance)
+    - [Using urlParams function](#using-urlparams-function)
   - [API](#api)
     - [set](#setname-value-savestate)
     - [append](#appendname-value-savestate)
@@ -38,16 +38,32 @@ Class that made for easy work with URL search params
 Using npm:
 
 ```bash
-$ npm install @troskey/url-params
+npm install @troskey/url-params
 ```
+
+Using yarn:
+
+```bash
+yarn add @troskey/url-params
+```
+
 
 ## Usage
 
 Methods **delete**, **set** and **append** returns *this* for   
 call chain, so you should use **url** or **toString()** to get   
-url string   
+url string
 
-## Creating an instance
+If first argument not defined, will be used *window.location.href*
+
+```javascript
+urlParams('https://github.com')
+  .set('hello', 'world')
+  .append('hello', 'web')
+  .url // https://github.com?hello=world&hello=web
+```
+
+### Creating an instance
 
 ```javascript
 import { URLParams } from 'url-params'
@@ -57,7 +73,7 @@ new URLParams('https://github.com')
   .get('hello') // "world"
 ```
 
-## Using urlParams function
+### Using urlParams function
 
 ```javascript
 import { urlParams } from 'url-params'
@@ -65,19 +81,6 @@ import { urlParams } from 'url-params'
 urlParams('https://github.com')
   .set('hello', 'world')
   .get('hello') // "world"
-```
-
-## Usage
-
-Methods **delete**, **set** and **append** returns *this* for   
-call chain, so you should use **url** or **toString()** to get   
-url string   
-
-```javascript
-urlParams('https://github.com')
-  .set('hello', 'world')
-  .append('hello', 'web')
-  .url // https://github.com?hello=world&hello=web
 ```
 
 ## API
