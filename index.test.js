@@ -12,26 +12,41 @@ global.window = {
   }
 }
 
+/**
+ * testing class without params
+ */
 describe(
   'new URLParams()',
   () => testAllFunctions(new URLParams())
 )
 
+/**
+ * testing class wit params
+ */
 describe(
   'new URLParams(url)',
   () => testAllFunctions(new URLParams(exampleURL))
 )
 
+/**
+ * testing function without params
+ */
 describe(
   'urlParams()',
   () => testAllFunctions(urlParams())
 )
 
+/**
+ * testing function with params
+ */
 describe(
   'urlParams(url)',
   () => testAllFunctions(urlParams(exampleURL))
 )
 
+/**
+ * testing all functional
+ */
 function testAllFunctions(instance) {
   it(
     'has url property',
