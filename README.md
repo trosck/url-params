@@ -11,7 +11,7 @@ Class that made for easy work with URL search params
   - [Browser Support](#browser-support)
   - [Installing](#installing)
   - [Creating an instance](#creating-an-instance)
-  - [Use urlParams function](#use-urlparams-function)
+  - [Using urlParams function](#using-urlparams-function)
   - [Usage](#usage)
   - [API](#api)
     - [set](#setname-value-savestate)
@@ -57,7 +57,7 @@ new URLParams('https://github.com')
   .get('hello') // "world"
 ```
 
-## Use urlParams function
+## Using urlParams function
 
 ```javascript
 import { urlParams } from 'url-params'
