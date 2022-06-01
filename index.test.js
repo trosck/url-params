@@ -45,18 +45,19 @@ describe(
 )
 
 /**
+ * testing urlParams proxy
+ */
+ describe(
+  'urlParams()',
+  () => testStateless(urlParams)
+)
+
+/**
  * testing all functional
  */
 function testAllFunctions(instance) {
-  it(
-    'has url property',
-    () => expect(instance.url).toBe(exampleURL)
-  )
 
-  it(
-    'set query param',
-    () => expect(instance.set(name, value).url).toBe(exampleWithParams)
-  )
+  testStateless(instance)
 
   it(
     'return value of query param',
@@ -81,5 +82,20 @@ function testAllFunctions(instance) {
   it(
     'delete query param',
     () => expect(instance.delete(name).url).toBe(exampleURL)
+  )
+}
+
+/**
+ * test stateless functional
+ */
+function testStateless(instance) {
+  it(
+    'has url property',
+    () => expect(instance.url).toBe(exampleURL)
+  )
+
+  it(
+    'set query param',
+    () => expect(instance.set(name, value).url).toBe(exampleWithParams)
   )
 }
