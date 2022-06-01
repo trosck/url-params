@@ -120,9 +120,21 @@ class URLParams {
   }
 }
 
-function urlParams(url) {
-  return new URLParams(url)
-}
+const urlParams = new Proxy(
+  url => new URLParams(url),
+  {
+    get(target, prop) {
+      if (prop in URLParams.prototype) {
+        const instance = new URLParams()
+        const value = instance[prop]
+
+        return (typeof value === 'function') ? value.bind(instance) : value
+      }
+
+      return
+    }
+  }
+)
 
 export {
   URLParams,
