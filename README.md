@@ -16,6 +16,7 @@ Class that made for easy work with URL search params
   - [Usage](#usage)
     - [Creating an instance](#creating-an-instance)
     - [Using urlParams function](#using-urlparams-function)
+    - [Using urlParams proxy](#using-urlparams-proxy)
   - [API](#api)
     - [set](#setname-value-savestate)
     - [append](#appendname-value-savestate)
@@ -82,6 +83,21 @@ new URLParams('https://github.com')
 import { urlParams } from 'url-params'
 
 urlParams('https://github.com')
+  .set('hello', 'world')
+  .get('hello') // "world"
+```
+
+### Using urlParams proxy
+
+creates instance on every call,
+uses window.location.href
+
+```javascript
+import { urlParams } from 'url-params'
+
+// window.location.href = 'https://github.com'
+
+urlParams
   .set('hello', 'world')
   .get('hello') // "world"
 ```
