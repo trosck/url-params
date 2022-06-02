@@ -4,7 +4,7 @@
   "description": "Class for working with URL query string (uses URL.searchparams interface under the hood)",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "jest"
   },
   "files": [
     "./dist/*"
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/jest": "^28.1.0",
     "jest": "^28.1.0",
+    "ts-jest": "^28.0.3",
     "typescript": "^4.7.2"
   },
   "type": "module",
