@@ -6,11 +6,7 @@ const exampleURL = 'https://example.com/'
 const exampleWithParams = `${exampleURL}?${name}=${value}`
 const exampleWithTwoParams = `${exampleWithParams}&${name}=${value}`
 
-global.window = {
-  location: {
-    href: exampleURL
-  }
-}
+global.window.location.href = exampleURL
 
 /**
  * testing class without params

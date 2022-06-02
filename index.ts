@@ -8,16 +8,18 @@
  *
  * @returns {void}
  */
-function changeUrl(url, saveState = false) {
+ function changeUrl(url: string | URL, saveState = false) {
+  const _url = url.toString()
+
   try {
     if (window.history.replaceState && !saveState) {
-      window.history.replaceState(null, document.title, url);
+      window.history.replaceState(null, document.title, _url);
     }
     else if (window.history.pushState && saveState) {
-      window.history.pushState(null, document.title, url)
+      window.history.pushState(null, document.title, _url)
     }
     else {
-      window.location.href = url
+      window.location.href = _url
     }
   } catch(e) {}
 }
@@ -26,7 +28,9 @@ function changeUrl(url, saveState = false) {
  * Managing URL parameters
  */
 class URLParams {
-  constructor(url) {
+  private _url: URL
+
+  constructor(url?: string | URL) {
     this._url = new (URL || window.URL)(url || window.location.href)
   }
 
@@ -43,8 +47,12 @@ class URLParams {
    *
    * @returns {URLParams}
    */
-  set(name, value, saveState = false) {
-    this._url.searchParams.set(name, value)
+  set(
+    name: string,
+    value: string | number,
+    saveState = false
+  ) {
+    this._url.searchParams.set(name, value.toString())
     changeUrl(this._url, saveState)
     return this
   }
@@ -56,8 +64,12 @@ class URLParams {
    * @param {any} value
    * @returns {URLParams}
    */
-  append(name, value, saveState = false) {
-    this._url.searchParams.append(name, value)
+  append(
+    name: string,
+    value: string | number,
+    saveState = false
+  ) {
+    this._url.searchParams.append(name, value.toString())
     changeUrl(this._url, saveState)
     return this
   }
@@ -69,7 +81,7 @@ class URLParams {
    *
    * @returns {String}
    */
-  get(name) {
+  get(name: string) {
     return this._url.searchParams.get(name)
   }
 
@@ -80,7 +92,7 @@ class URLParams {
    *
    * @returns {Array<String>} An array of values
    */
-  getAll(name) {
+  getAll(name: string) {
     return this._url.searchParams.getAll(name)
   }
 
@@ -104,7 +116,7 @@ class URLParams {
    *
    * @returns {URLParams}
    */
-  delete(name, saveState = false) {
+  delete(name: string, saveState = false) {
     this._url.searchParams.delete(name)
     changeUrl(this._url, saveState)
     return this
@@ -121,17 +133,14 @@ class URLParams {
 }
 
 const urlParams = new Proxy(
-  url => new URLParams(url),
+  (url?: string | URL) => new URLParams(url),
   {
-    get(target, prop) {
-      if (prop in URLParams.prototype) {
-        const instance = new URLParams()
-        const value = instance[prop]
+    get(target, prop: string) {
+      const value = target.prototype[prop]
+      if (!value) return
 
-        return (typeof value === 'function') ? value.bind(instance) : value
-      }
-
-      return
+      const instance = new URLParams()
+      return (typeof value === 'function') ? value.bind(instance) : value
     }
   }
 )
