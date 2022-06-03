@@ -1,4 +1,4 @@
-import { URLParams, urlParams } from './index.js'
+import { URLParams, urlParams, IURLParams } from './index'
 
 const [name, value] = ['hello', 'world']
 
@@ -6,11 +6,12 @@ const exampleURL = 'https://example.com/'
 const exampleWithParams = `${exampleURL}?${name}=${value}`
 const exampleWithTwoParams = `${exampleWithParams}&${name}=${value}`
 
-global.window = {
-  location: {
+global.window = Object.create(global.window || {});
+Object.defineProperty(window, 'location', {
+  value: {
     href: exampleURL
   }
-}
+})
 
 /**
  * testing class without params
@@ -48,14 +49,14 @@ describe(
  * testing urlParams proxy
  */
  describe(
-  'urlParams()',
+  'urlParams',
   () => testStateless(urlParams)
 )
 
 /**
  * testing all functional
  */
-function testAllFunctions(instance) {
+function testAllFunctions(instance: IURLParams) {
 
   testStateless(instance)
 
@@ -88,7 +89,7 @@ function testAllFunctions(instance) {
 /**
  * test stateless functional
  */
-function testStateless(instance) {
+function testStateless(instance: IURLParams) {
   it(
     'has url property',
     () => expect(instance.url).toBe(exampleURL)
@@ -97,5 +98,12 @@ function testStateless(instance) {
   it(
     'set query param',
     () => expect(instance.set(name, value).url).toBe(exampleWithParams)
+  )
+
+  it(
+    'get query param',
+    () => expect(
+      instance.set(name, value).get(name)
+    ).toBe(value)
   )
 }
