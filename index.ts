@@ -169,12 +169,13 @@ export const urlParams: urlParamsType = new Proxy(
   {
     get(target, prop) {
       const key = prop as keyof IURLParams
-      const value = target.prototype[key]
 
-      if (!value) return
+      if (key in URLParams.prototype) {
+        const instance = new URLParams()
+        const value = instance[key]
 
-      const instance = new URLParams()
-      return typeof value === 'function' ? value.bind(instance) : instance[key]
+        return typeof value === 'function' ? value.bind(instance) : value
+      }
     }
   }
 )
