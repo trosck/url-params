@@ -1,4 +1,4 @@
-import { URLParams, urlParams } from './index'
+import { URLParams, urlParams, IURLParams } from './index'
 
 const [name, value] = ['hello', 'world']
 
@@ -48,15 +48,15 @@ describe(
 /**
  * testing urlParams proxy
  */
-//  describe(
-//   'urlParams()',
-//   () => testStateless(urlParams)
-// )
+ describe(
+  'urlParams',
+  () => testStateless(urlParams)
+)
 
 /**
  * testing all functional
  */
-function testAllFunctions(instance: URLParams) {
+function testAllFunctions(instance: IURLParams) {
 
   testStateless(instance)
 
@@ -89,7 +89,7 @@ function testAllFunctions(instance: URLParams) {
 /**
  * test stateless functional
  */
-function testStateless(instance: URLParams) {
+function testStateless(instance: IURLParams) {
   it(
     'has url property',
     () => expect(instance.url).toBe(exampleURL)
@@ -98,5 +98,12 @@ function testStateless(instance: URLParams) {
   it(
     'set query param',
     () => expect(instance.set(name, value).url).toBe(exampleWithParams)
+  )
+
+  it(
+    'get query param',
+    () => expect(
+      instance.set(name, value).get(name)
+    ).toBe(value)
   )
 }
