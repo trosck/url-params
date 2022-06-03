@@ -8,7 +8,7 @@
  *
  * @returns {void}
  */
- function changeUrl(url: string | URL, saveState = false) {
+function changeUrl(url: string | URL, saveState = false) {
   const _url = url.toString()
 
   try {
@@ -24,19 +24,8 @@
   } catch(e) {}
 }
 
-/**
- * Managing URL parameters
- */
-class URLParams {
-  private _url: URL
-
-  constructor(url?: string | URL) {
-    this._url = new (URL || window.URL)(url || window.location.href)
-  }
-
-  get url() {
-    return this.toString()
-  }
+export interface IURLParams {
+  get url(): string
 
   /**
    * Set parameter
@@ -50,12 +39,8 @@ class URLParams {
   set(
     name: string,
     value: string | number,
-    saveState = false
-  ) {
-    this._url.searchParams.set(name, value.toString())
-    changeUrl(this._url, saveState)
-    return this
-  }
+    saveState?: boolean
+  ): this
 
   /**
    * Appends a specified key/value pair as a new search parameter.
@@ -67,12 +52,8 @@ class URLParams {
   append(
     name: string,
     value: string | number,
-    saveState = false
-  ) {
-    this._url.searchParams.append(name, value.toString())
-    changeUrl(this._url, saveState)
-    return this
-  }
+    saveState?: boolean
+  ): this
 
   /**
    * Returns the first value associated with the given search parameter
@@ -81,9 +62,7 @@ class URLParams {
    *
    * @returns {String}
    */
-  get(name: string) {
-    return this._url.searchParams.get(name)
-  }
+  get(name: string): string | null
 
   /**
    * Returns all the values associated with a given search parameter
@@ -92,9 +71,7 @@ class URLParams {
    *
    * @returns {Array<String>} An array of values
    */
-  getAll(name: string) {
-    return this._url.searchParams.getAll(name)
-  }
+  getAll(name: string): string[]
 
   /**
    * Returns all values and parameters in array
@@ -102,9 +79,7 @@ class URLParams {
    * @returns {Array<Array<String, String>>} an array of arrays like Object.entries
    * with [key, value] structure
    */
-  getAllParams() {
-    return Array.from(this._url.searchParams.entries())
-  }
+  getAllParams(): Array<[string, string]>
 
   /**
    * Deletes the given search parameter
@@ -114,38 +89,92 @@ class URLParams {
    * @param {String} name - The name of the parameter to be deleted.
    * @param {Boolean} saveState
    *
-   * @returns {URLParams}
+   * @returns {this}
    */
-  delete(name: string, saveState = false) {
-    this._url.searchParams.delete(name)
-    changeUrl(this._url, saveState)
-    return this
-  }
+  delete(name: string, saveState?: boolean): this
 
   /**
    * Returns a USVString containing the whole URL
    *
    * @returns {String} URL string representation
    */
+  toString(): string
+}
+
+/**
+ * Managing URL parameters
+ */
+export class URLParams implements IURLParams {
+  private _url: URL
+
+  constructor(url?: string | URL) {
+    this._url = new (URL || window.URL)(url || window.location.href)
+  }
+
+  get url() {
+    return this.toString()
+  }
+
+  set(
+    name: string,
+    value: string | number,
+    saveState = false
+  ) {
+    this._url.searchParams.set(name, value.toString())
+    changeUrl(this._url, saveState)
+    return this
+  }
+
+  append(
+    name: string,
+    value: string | number,
+    saveState = false
+  ) {
+    this._url.searchParams.append(name, value.toString())
+    changeUrl(this._url, saveState)
+    return this
+  }
+
+  get(name: string) {
+    return this._url.searchParams.get(name)
+  }
+
+  getAll(name: string) {
+    return this._url.searchParams.getAll(name)
+  }
+
+  getAllParams() {
+    return Array.from(this._url.searchParams.entries())
+  }
+
+  delete(name: string, saveState = false) {
+    this._url.searchParams.delete(name)
+    changeUrl(this._url, saveState)
+    return this
+  }
+
   toString() {
     return this._url.toString()
   }
 }
 
-const urlParams = new Proxy(
+export interface urlParamsType extends IURLParams {
+  (url?: string | URL): IURLParams
+}
+
+// TODO: remove ts-ignore and fix error
+// @ts-ignore
+export const urlParams: urlParamsType = new Proxy(
   (url?: string | URL) => new URLParams(url),
   {
-    get(target, prop: string) {
-      const value = target.prototype[prop]
+    get(target, prop) {
+      const key = prop as keyof IURLParams
+      const value = target.prototype[key]
+
       if (!value) return
 
       const instance = new URLParams()
-      return (typeof value === 'function') ? value.bind(instance) : value
+      return typeof value === 'function' ? value.bind(instance) : instance[key]
     }
   }
 )
-
-export {
-  URLParams,
-  urlParams
-}
