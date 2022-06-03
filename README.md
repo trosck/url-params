@@ -17,6 +17,7 @@ Class that made for easy work with URL search params
     - [Creating an instance](#creating-an-instance)
     - [Using urlParams function](#using-urlparams-function)
     - [Using urlParams proxy](#using-urlparams-proxy)
+    - [Import minified version](#import-minified-version)
   - [API](#api)
     - [set](#setname-value-savestate)
     - [append](#appendname-value-savestate)
@@ -100,6 +101,22 @@ import { urlParams } from 'url-params'
 urlParams
   .set('hello', 'world')
   .get('hello') // "world"
+```
+
+### Import minified version
+
+```javascript
+import { URLParams, urlParams } from 'url-params/dist/index.min.js'
+
+new URLParams().url
+
+// ...
+
+urlParams().url
+
+// ...
+
+urlParams.url
 ```
 
 ## API
