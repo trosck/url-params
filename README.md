@@ -5,7 +5,7 @@ Class that made for easy work with URL search params
 ![](https://img.shields.io/npm/v/@trosckey/url-params.svg)
 ![](https://img.shields.io/github/languages/code-size/trosck/url-params)
 ![](https://img.shields.io/bundlephobia/minzip/@trosckey/url-params)
-![](https://img.shields.io/npm/l/@trosckey/url-params)
+![](https://img.shields.io/npm/l/@trosckey/url-params)   
 ![](https://img.shields.io/npm/dt/@trosckey/url-params)
 ![](https://img.shields.io/github/workflow/status/trosck/url-params/npm%20publish)
 ![](https://img.shields.io/github/last-commit/trosck/urlParams/main)
@@ -17,6 +17,7 @@ Class that made for easy work with URL search params
     - [Creating an instance](#creating-an-instance)
     - [Using urlParams function](#using-urlparams-function)
     - [Using urlParams proxy](#using-urlparams-proxy)
+    - [Import minified version](#import-minified-version)
   - [API](#api)
     - [set](#setname-value-savestate)
     - [append](#appendname-value-savestate)
@@ -100,6 +101,22 @@ import { urlParams } from 'url-params'
 urlParams
   .set('hello', 'world')
   .get('hello') // "world"
+```
+
+### Import minified version
+
+```javascript
+import { URLParams, urlParams } from 'url-params/dist/index.min.js'
+
+new URLParams().url
+
+// ...
+
+urlParams().url
+
+// ...
+
+urlParams.url
 ```
 
 ## API
