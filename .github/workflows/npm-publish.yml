@@ -16,6 +16,16 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org/'
+
+      - name: 'install dependencies'
+        run: yarn --frozen-lockfile
+
+      - name: 'compile typescript'
+        run: yarn build
+
+      - name: 'minify js'
+        run: yarn minify
+
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
