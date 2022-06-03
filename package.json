@@ -4,7 +4,8 @@
   "description": "Class for working with URL query string (uses URL.searchparams interface under the hood)",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "files": [
     "./dist/*"
