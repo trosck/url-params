@@ -5,7 +5,7 @@ Class that made for easy work with URL search params
 [![ci](https://github.com/trosck/url-params/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trosck/url-params/actions/workflows/ci.yml)
 [![npm publish](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml)
 
-![](https://img.shields.io/npm/v/@trosckey/url-params.svg)
+![](https://img.shields.io/npm/v/@trosckey/url-params.svg?logo=npm)
 ![](https://img.shields.io/github/languages/code-size/trosck/url-params)
 ![](https://img.shields.io/bundlephobia/minzip/@trosckey/url-params)
 ![](https://img.shields.io/npm/l/@trosckey/url-params)   
