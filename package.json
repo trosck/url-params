@@ -1,6 +1,6 @@
 {
   "name": "@trosckey/url-params",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Class for working with URL query string (uses URL.searchparams interface under the hood)",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
