@@ -1,6 +1,4 @@
-# urlParams
-
-Class that made for easy work with URL search params
+# url-params
 
 [![ci](https://github.com/trosck/url-params/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trosck/url-params/actions/workflows/ci.yml)
 [![npm publish](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml)
