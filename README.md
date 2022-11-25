@@ -84,7 +84,7 @@ urlParams('https://github.com')
   .get('hello') // "world"
 ```
 
-### Using urlParams proxy
+### Using urlParams Proxy
 
 creates instance on every call,
 uses window.location.href
