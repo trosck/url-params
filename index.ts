@@ -108,7 +108,7 @@ export class URLParams implements IURLParams {
   private _url: URL
 
   constructor(url?: string | URL) {
-    this._url = new (URL || window.URL)(url || window.location.href)
+    this._url = new URL(url || window.location.href)
   }
 
   get url() {
