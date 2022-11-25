@@ -26,9 +26,9 @@
   "author": "trosckey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/troskcey/url-params/issues"
+    "url": "https://github.com/trosck/url-params/issues"
   },
-  "homepage": "https://github.com/troskcey/url-params#readme",
+  "homepage": "https://github.com/trosck/url-params/#readme",
   "devDependencies": {
     "@types/jest": "^28.1.0",
     "jest": "^28.1.0",
