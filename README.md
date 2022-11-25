@@ -1,5 +1,21 @@
 # url-params
 
+Makes your work with search params in URL easy.
+
+Instead of:
+```js
+const url = new URL(window.location.href)
+url.searchParams.set("hello", "world")
+url.searchParams.set("test", "123")
+window.location.href = url.toString()
+```
+you can do this:
+```js
+urlParams
+  .set("hello", "world")
+  .set("test", "123")
+```
+
 [![ci](https://github.com/trosck/url-params/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trosck/url-params/actions/workflows/ci.yml)
 [![npm publish](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml)
 
@@ -53,7 +69,8 @@ yarn add @troskey/url-params
 ## Usage
 
 Methods **delete**, **set** and **append** returns *this* for   
-call chain. To get URL string you can use instance property **url** or **toString()**.
+call chain. To get URL string you can use instance   
+property **url** or **toString()**.
 
 If first argument is not defined, *window.location.href* will be used.
 
@@ -102,7 +119,12 @@ urlParams
 ### Import minified version
 
 ```javascript
-import { URLParams, urlParams } from 'url-params/dist/index.min.js'
+import {
+  URLParams,
+  urlParams
+} from 'url-params/dist/index.min.js'
+
+// ...
 
 new URLParams().url
 
