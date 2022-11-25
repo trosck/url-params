@@ -53,7 +53,7 @@ yarn add @troskey/url-params
 ## Usage
 
 Methods **delete**, **set** and **append** returns *this* for   
-call chain. To get URL string you can use **url** or **toString()**.
+call chain. To get URL string you can use instance property **url** or **toString()**.
 
 If first argument is not defined, *window.location.href* will be used.
 
