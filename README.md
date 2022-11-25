@@ -53,10 +53,9 @@ yarn add @troskey/url-params
 ## Usage
 
 Methods **delete**, **set** and **append** returns *this* for   
-call chain, so you should use **url** or **toString()** to get   
-url string
+call chain. To get URL string you can use **url** or **toString()**.
 
-If first argument not defined, will be used *window.location.href*
+If first argument is not defined, *window.location.href* will be used.
 
 ```javascript
 urlParams('https://github.com')
