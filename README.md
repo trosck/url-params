@@ -56,13 +56,13 @@ urlParams
 Using npm:
 
 ```bash
-npm install @troskey/url-params
+npm install @trosckey/url-params
 ```
 
 Using yarn:
 
 ```bash
-yarn add @troskey/url-params
+yarn add @trosckey/url-params
 ```
 
 
@@ -84,7 +84,7 @@ urlParams('https://github.com')
 ### Creating an instance
 
 ```javascript
-import { URLParams } from 'url-params'
+import { URLParams } from '@trosckey/url-params'
 
 new URLParams('https://github.com')
   .set('hello', 'world')
@@ -94,7 +94,7 @@ new URLParams('https://github.com')
 ### Using urlParams function
 
 ```javascript
-import { urlParams } from 'url-params'
+import { urlParams } from '@trosckey/url-params'
 
 urlParams('https://github.com')
   .set('hello', 'world')
@@ -107,7 +107,7 @@ creates instance on every call,
 uses window.location.href
 
 ```javascript
-import { urlParams } from 'url-params'
+import { urlParams } from '@trosckey/url-params'
 
 // window.location.href = 'https://github.com'
 
@@ -122,7 +122,7 @@ urlParams
 import {
   URLParams,
   urlParams
-} from 'url-params/dist/index.min.js'
+} from '@trosckey/url-params/dist/index.min.js'
 
 // ...
 
