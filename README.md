@@ -222,4 +222,4 @@ Returns url string, can be used for [auto cast to string](https://developer.mozi
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE.md)
