@@ -34,7 +34,7 @@ export interface IURLParams {
    * @param {String|Number} value
    * @param {Boolean} saveState
    *
-   * @returns {URLParams}
+   * @returns {this}
    */
   set(
     name: string,
@@ -43,11 +43,24 @@ export interface IURLParams {
   ): this
 
   /**
+   * Set many parameters from object
+   *
+   * @param {{[key: string]: string | number}} properties
+   * @param {Boolean} saveState
+   *
+   * @returns {this}
+   */
+  setAll(
+    properties: { [key: string]: string | number },
+    saveState?: boolean
+  ): this
+
+  /**
    * Appends a specified key/value pair as a new search parameter.
    *
    * @param {String} name
    * @param {any} value
-   * @returns {URLParams}
+   * @returns {this}
    */
   append(
     name: string,
@@ -60,7 +73,7 @@ export interface IURLParams {
    *
    * @param {String} name
    *
-   * @returns {String}
+   * @returns {String|null}
    */
   get(name: string): string | null
 
@@ -121,6 +134,19 @@ export class URLParams implements IURLParams {
     saveState = false
   ) {
     this._url.searchParams.set(name, value.toString())
+    changeUrl(this._url, saveState)
+    return this
+  }
+
+  setAll(
+    properties: { [key: string]: string | number },
+    saveState = false
+  ) {
+    for (const key in properties) {
+      if (properties.hasOwnProperty(key)) {
+        this._url.searchParams.set(key, properties[key].toString())
+      }
+    }
     changeUrl(this._url, saveState)
     return this
   }
