@@ -35,6 +35,7 @@ urlParams
     - [Import minified version](#import-minified-version)
   - [API](#api)
     - [set](#setname-value-savestate)
+    - [setAll](#setallproperties-savestate)
     - [append](#appendname-value-savestate)
     - [get](#getname)
     - [getAll](#getallname)
@@ -159,6 +160,19 @@ Sets value with the given key
 urlParams('https://github.com')
   .set('hello', 'world')
   .set('hi', 'web')
+  .url // https://github.com?hello=world&hi=web
+```
+
+### setAll(properties[, saveState])
+
+Sets many values from object
+
+```javascript
+urlParams('https://github.com')
+  .setAll({
+    hello: "world",
+    hi: "web",
+  })
   .url // https://github.com?hello=world&hi=web
 ```
 
