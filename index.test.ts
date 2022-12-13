@@ -13,6 +13,8 @@ Object.defineProperty(window, 'location', {
   }
 })
 
+const params = { [name]: value }
+
 /**
  * testing class without params
  */
@@ -98,6 +100,11 @@ function testStateless(instance: IURLParams) {
   it(
     'set query param',
     () => expect(instance.set(name, value).url).toBe(exampleWithParams)
+  )
+
+  it(
+    'set many query params',
+    () => expect(instance.setAll(params).url).toBe(exampleWithParams)
   )
 
   it(
