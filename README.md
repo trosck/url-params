@@ -15,6 +15,13 @@ urlParams
   .set("hello", "world")
   .set("test", "123")
 ```
+or even this:
+```js
+urlParams.setAll({
+  hello: "world",
+  test: 123
+})
+```
 
 [![ci](https://github.com/trosck/url-params/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trosck/url-params/actions/workflows/ci.yml)
 [![npm publish](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml)
