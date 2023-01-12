@@ -144,7 +144,9 @@ export class URLParams implements IURLParams {
   ) {
     for (const key in properties) {
       if (properties.hasOwnProperty(key)) {
-        this._url.searchParams.set(key, properties[key].toString())
+        this._url.searchParams.set(
+          key, properties[key]?.toString?.() ?? ""
+        )
       }
     }
     changeUrl(this._url, saveState)
