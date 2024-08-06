@@ -23,10 +23,6 @@ urlParams.setAll({
 })
 ```
 
-[![ci](https://github.com/trosck/url-params/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/trosck/url-params/actions/workflows/ci.yml)
-[![npm publish](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/trosck/url-params/actions/workflows/npm-publish.yml)
-[![](https://img.shields.io/github/last-commit/trosck/url-params/main)](https://github.com/trosck/url-params/commits/main)
-
 [![](https://img.shields.io/npm/v/@trosckey/url-params.svg?logo=npm)](https://www.npmjs.com/package/@trosckey/url-params)
 ![](https://img.shields.io/github/languages/code-size/trosck/url-params)
 ![](https://img.shields.io/npm/dt/@trosckey/url-params)
