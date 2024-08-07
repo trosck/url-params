@@ -1,6 +1,6 @@
 # url-params
 
-Makes your work with search params in URL easy.
+Simplifies working with search parameters in URLs.
 
 Instead of:
 ```js
